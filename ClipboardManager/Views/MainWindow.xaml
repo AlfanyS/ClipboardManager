@@ -1,0 +1,141 @@
+﻿<Window x:Class="ClipboardManager.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClipboardManager.ViewModels"
+        mc:Ignorable="d"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        Title="ClipBoardManager" Height="450" MinHeight="450" Width="400" MinWidth="410" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
+        Topmost="False" WindowStyle="None" AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip">
+
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid.LayoutTransform>
+            <RotateTransform Angle="0"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border CornerRadius="10,10,0,0" UseLayoutRounding="True" Grid.Row="0" BorderBrush="#FF3BE510" BorderThickness="5"  MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <StackPanel  Height="35" Background="#FF3BE510" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Width="50" FocusVisualStyle="{StaticResource BtnFocusVisual}" Content="X" HorizontalAlignment="Center"  Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseWindow}" CommandParameter="false" ToolTip="Спрятать">
+                    <Button.Triggers>
+                    </Button.Triggers>
+                </Button>
+                <Button Width="50"  Content="☐" HorizontalAlignment="Right"  Background="Transparent" BorderBrush="Transparent"/>
+                <Button Width="50"  Content="-" HorizontalAlignment="Right"   Background="Transparent" BorderBrush="Transparent"/>
+            </StackPanel>
+        </Border>
+        <Border UseLayoutRounding="True" Grid.Row="1" BorderThickness="9"  CornerRadius="0,0,0,10">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3BE510" Offset="0.484"/>
+                    <GradientStop Color="#FF848883" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <DockPanel LastChildFill="True">
+                <tb:TaskbarIcon x:Name="TrayIcon" TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick" IconSource="/Resources/ApplicationIcon.ico" Visibility="Visible">
+                    <tb:TaskbarIcon.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Выйти" Command="{Binding CloseWindow}" CommandParameter="true"/>
+                        </ContextMenu>
+                    </tb:TaskbarIcon.ContextMenu>
+                </tb:TaskbarIcon>
+                <Menu Height="40"  DockPanel.Dock="Top">
+                    <MenuItem  FontSize="13"  Width="Auto">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="40" Width="40" Margin="0,0,5,0" Source="/Resources/ApplicationIcon.ico"/>
+                                <TextBlock VerticalAlignment="Center">Программа</TextBlock>
+                            </StackPanel>
+                        </MenuItem.Header>
+                        <MenuItem.Items>
+                            <MenuItem Header="Спрятать" Command="{Binding CloseWindow}" CommandParameter="false"/>
+                            <Separator/>
+                            <MenuItem Header="Выйти" Command="{Binding CloseWindow}" CommandParameter="true"/>
+                        </MenuItem.Items>
+                    </MenuItem>
+                    <MenuItem FontSize="13" Width="Auto">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Height="10" Width="10" Margin="0,0,5,0" Fill="Gray"/>
+                                <TextBlock>Настройки</TextBlock>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem FontSize="13" Width="Auto">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Height="10" Width="10" Margin="0,0,5,0" Fill="Yellow"/>
+                                <TextBlock>Отслеживание данных</TextBlock>
+                            </StackPanel>
+                        </MenuItem.Header>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <CheckBox Content="Текст" IsChecked="{Binding IsCollectingText,Mode=TwoWay}"/>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/DataTypesImages/Text.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <CheckBox Content="Изображения" IsChecked="{Binding IsCollectingImage,Mode=TwoWay}"/>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/DataTypesImages/Image.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <CheckBox Content="Файлы" IsChecked="{Binding IsCollectingFile,Mode=TwoWay}"/>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/DataTypesImages/File.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+                <Border DockPanel.Dock="Top" Height="50" BorderBrush="Black" BorderThickness="2">
+                    <StackPanel  Orientation="Horizontal" Background="WhiteSmoke">
+                        <Button x:Name="AddToBufferButton" Style="{StaticResource ToolButtonStyle}" Content="Add" 
+                                ToolTip="Добавить выбранный элемент в буфер" Command="{Binding Add}"/>
+                        <Button x:Name="UpdateListButton" Style="{StaticResource ToolButtonStyle}" Content="Upd" 
+                                ToolTip="Обновить" Command="{Binding Update}"/>
+                        <Button x:Name="DeleteSelectedButton" Style="{StaticResource ToolButtonStyle}" Content="DeleS" 
+                                ToolTip="Удалить выбранный элемент"/>
+                        <Separator Background="Black"  />
+                        <Button x:Name="DeleteAllButton" Style="{StaticResource ToolButtonStyle}" Content="DelAll"
+                                ToolTip="Отчистить все" Command="{Binding DelAll}"/>
+                    </StackPanel>
+                </Border>
+                <StatusBar DockPanel.Dock="Bottom" Height="30" >
+                    <TextBlock FontSize="15" Text="Всего элементов:" TextAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="15"  Text="{Binding ListCount}" Padding="2" TextAlignment="Center" VerticalAlignment="Center"/>
+                </StatusBar>
+                <ListBox Style="{StaticResource ListBoxStyle}" SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}" 
+                         ItemsSource="{Binding ListboxItems}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border MouseLeftButtonDown="Listbox_MouseLeftButtonDown" ToolTip="{Binding ToolTip}" Margin="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="10*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image VerticalAlignment="Top" Grid.Column="0" Height="20" Width="20" Margin="0,0,10,0" Source="{Binding IconPath}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding ItemText}" TextWrapping="Wrap" TextAlignment="Left" HorizontalAlignment="Stretch"/>
+                                    <Image MaxWidth="{Binding ImageContent.PixelWidth,Mode=OneTime}" MaxHeight="{Binding ImageContent.PixelHeight,Mode=OneTime}" Grid.Column="1" Source="{Binding ImageContent}"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>
