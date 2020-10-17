@@ -26,6 +26,7 @@ namespace ClipboardManager.Views
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		SettingsWindow SettingsWindow = new SettingsWindow();
 		public MainVM VM = new MainVM();
 		public MainWindow()
 		{
@@ -44,6 +45,7 @@ namespace ClipboardManager.Views
 				e.Cancel = true;
 				Hide();
 			}
+			SettingsWindow.Close();
 
 		}
 		
@@ -65,5 +67,10 @@ namespace ClipboardManager.Views
         {
 			this.DragMove();
 		}
+
+        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow.ShowDialog();
+        }
     }
 }

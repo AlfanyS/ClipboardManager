@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ClipboardManager.Controls.DoubleUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClipboardManager.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="0" Text="{Binding Value, Mode=TwoWay}"/>
+        <Grid  Grid.Column="1" HorizontalAlignment="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button Width="30" FontSize="10" Content="Up↑" Grid.Row="0" VerticalContentAlignment="Center" Click="Add_Click"/>
+            <Button Width="30" Content="Dwn↓" FontSize="10" Grid.Row="1" VerticalContentAlignment="Center" Click="Substruct_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

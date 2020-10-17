@@ -34,9 +34,14 @@ namespace ClipboardManager.Models
             //Установка текста для списка
             for (int k = 0; k < ((StringCollection)clipboard).Count; k++)
             {
-                ItemText += " || " + $"{k} " + ((StringCollection)clipboard)[k];
+                ItemText +=  $"{k}. " + Path.GetFileName(((StringCollection)clipboard)[k]) + "\n";
             }
-            ItemText += " ||";
+            for (int k = 0; k < ((StringCollection)clipboard).Count; k++)
+            {
+                ToolTip += $"{k}. " + ((StringCollection)clipboard)[k] + "\n";
+            }
+
+
         }
 
         public void SaveDataToLocal(object c)

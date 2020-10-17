@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClipboardManager.ViewModels"
+        xmlns:p="clr-namespace:ClipboardManager.Properties"
         mc:Ignorable="d"
         xmlns:tb="http://www.hardcodet.net/taskbar"
-        Title="ClipBoardManager" Height="450" MinHeight="450" Width="400" MinWidth="410" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
+        Title="ClipBoardManager" Height="450" MinHeight="{Binding Source={x:Static p:Settings.Default},Path=MinWindowHeight}" Width="400" MinWidth="{Binding Source={x:Static p:Settings.Default},Path=MinWindowWidth}" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
         Topmost="False" WindowStyle="None" AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip">
 
     <Window.Resources>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="WindowGrid">
         <Grid.LayoutTransform>
             <RotateTransform Angle="0"/>
         </Grid.LayoutTransform>
@@ -19,36 +20,29 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border CornerRadius="10,10,0,0" UseLayoutRounding="True" Grid.Row="0" BorderBrush="#FF3BE510" BorderThickness="5"  MouseLeftButtonDown="Border_MouseLeftButtonDown">
-            <StackPanel  Height="35" Background="#FF3BE510" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Button Width="50" FocusVisualStyle="{StaticResource BtnFocusVisual}" Content="X" HorizontalAlignment="Center"  Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseWindow}" CommandParameter="false" ToolTip="Спрятать">
-                    <Button.Triggers>
-                    </Button.Triggers>
-                </Button>
-                <Button Width="50"  Content="☐" HorizontalAlignment="Right"  Background="Transparent" BorderBrush="Transparent"/>
-                <Button Width="50"  Content="-" HorizontalAlignment="Right"   Background="Transparent" BorderBrush="Transparent"/>
-            </StackPanel>
-        </Border>
-        <Border UseLayoutRounding="True" Grid.Row="1" BorderThickness="9"  CornerRadius="0,0,0,10">
-            <Border.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="#FF3BE510" Offset="0.484"/>
-                    <GradientStop Color="#FF848883" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-            <DockPanel LastChildFill="True">
-                <tb:TaskbarIcon x:Name="TrayIcon" TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick" IconSource="/Resources/ApplicationIcon.ico" Visibility="Visible">
+        <tb:TaskbarIcon x:Name="TrayIcon" TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick" IconSource="/Resources/ApplicationIcon.ico" Visibility="Visible">
                     <tb:TaskbarIcon.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Выйти" Command="{Binding CloseWindow}" CommandParameter="true"/>
                         </ContextMenu>
                     </tb:TaskbarIcon.ContextMenu>
                 </tb:TaskbarIcon>
+        <Border Grid.Row="0" Style="{StaticResource HeadWindowBorderStyle}"  MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <StackPanel Height="35" Style="{StaticResource HeadWindowBorderStyle}" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button  Style="{StaticResource CloseButtonStyle}" Width="50" Content="X" HorizontalAlignment="Center"  Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseWindow}" CommandParameter="false" ToolTip="Спрятать">
+
+                </Button>
+                <Button Width="50"  Content="☐" HorizontalAlignment="Right"  Background="Transparent" BorderBrush="Transparent"/>
+                <Button Width="50"  Content="-" HorizontalAlignment="Right"   Background="Transparent" BorderBrush="Transparent"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" Style="{StaticResource BodyWindowStyle}">
+            <DockPanel LastChildFill="True">
                 <Menu Height="40"  DockPanel.Dock="Top">
                     <MenuItem  FontSize="13"  Width="Auto">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="40" Width="40" Margin="0,0,5,0" Source="/Resources/ApplicationIcon.ico"/>
+                                <Image UseLayoutRounding="True" Height="40" Width="40" Margin="0,0,5,0" Source="/Resources/ApplicationIcon.ico"/>
                                 <TextBlock VerticalAlignment="Center">Программа</TextBlock>
                             </StackPanel>
                         </MenuItem.Header>
@@ -58,7 +52,7 @@
                             <MenuItem Header="Выйти" Command="{Binding CloseWindow}" CommandParameter="true"/>
                         </MenuItem.Items>
                     </MenuItem>
-                    <MenuItem FontSize="13" Width="Auto">
+                    <MenuItem FontSize="13" Width="Auto" Click="SettingsMenuItem_Click">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Height="10" Width="10" Margin="0,0,5,0" Fill="Gray"/>

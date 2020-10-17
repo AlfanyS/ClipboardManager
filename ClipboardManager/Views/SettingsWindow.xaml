@@ -1,0 +1,64 @@
+﻿<Window x:Class="ClipboardManager.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClipboardManager.Views"
+        mc:Ignorable="d"
+        xmlns:p="clr-namespace:ClipboardManager.Properties"
+        xmlns:ctrl="clr-namespace:ClipboardManager.Controls"
+        xmlns:vm="clr-namespace:ClipboardManager.ViewModels"
+        Title="SettingsWindow" Topmost="True"  AllowsTransparency="True" Height="450" Width="800" Background="Transparent" WindowStyle="None" ResizeMode="NoResize">
+    <Grid x:Name="WindowGrid">
+        <Grid.LayoutTransform>
+            <RotateTransform Angle="0"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" UseLayoutRounding="True" CornerRadius="10,10,0,0" BorderBrush="Gray" Background="Gray" BorderThickness="5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <StackPanel Height="35" Background="Gray" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Width="50" Content="X" HorizontalAlignment="Center"  Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseWindow}" CommandParameter="false" ToolTip="Спрятать">
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="0,0,0,10" Background="Gray" Grid.Row="1" BorderThickness="9">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Gray" Offset="0.767"/>
+                    <GradientStop Color="#FFFFFBFB" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="Основные">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Expander Grid.Row="0" Margin="5" Header="Окно" Padding="5" BorderBrush="LightBlue" BorderThickness="2">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Content="Минимальная ширина окна (px)"/>
+                                <ctrl:DoubleUpDown Grid.Column="1" Grid.Row="0" Height="30" Width="100" MinValue="0" MaxValue="1000" Value="{Binding Source={x:Static p:Settings.Default},Path=MinWindowWidth,Mode=TwoWay}"/>
+                                <Label Grid.Column="0" Grid.Row="1" Content="Минимальная высота окна (px)"/>
+                                <ctrl:DoubleUpDown Grid.Column="1" Grid.Row="1" Height="30" Width="100" MinValue="0" MaxValue="864" Value="{Binding Source={x:Static p:Settings.Default},Path=MinWindowHeight,Mode=TwoWay}"/>
+                            </Grid>
+                        </Expander>
+                        <Expander Grid.Row="1" Margin="5" Header="Еще чтото" Padding="5" BorderBrush="LightBlue" BorderThickness="2">
+                            
+                        </Expander>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
+    </Grid>
+</Window>

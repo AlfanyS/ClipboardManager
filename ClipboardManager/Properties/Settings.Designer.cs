@@ -22,5 +22,29 @@ namespace ClipboardManager.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("410")]
+        public double MinWindowWidth {
+            get {
+                return ((double)(this["MinWindowWidth"]));
+            }
+            set {
+                this["MinWindowWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("450")]
+        public double MinWindowHeight {
+            get {
+                return ((double)(this["MinWindowHeight"]));
+            }
+            set {
+                this["MinWindowHeight"] = value;
+            }
+        }
     }
 }

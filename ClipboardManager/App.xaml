@@ -18,17 +18,37 @@
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="BorderThickness" Value="5"/>
         </Style>
-        <Style x:Key="BtnFocusVisual">
-            <Setter Property="Control.Template">
+
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ColorAnimation Storyboard.TargetProperty="Foreground.Color" From="Black" To="Red" Duration="0:0:0.1" AutoReverse="True"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <!-- Window Styles-->
+        <Style x:Key="HeadWindowBorderStyle">
+            <Setter Property="Border.BorderBrush" Value="#FF3BE510"/>
+            <Setter Property="Border.CornerRadius" Value="10,10,0,0"/>
+            <Setter Property="Border.UseLayoutRounding" Value="True"/>
+            <Setter Property="Border.BorderThickness" Value="5"/>
+            <Setter Property="Control.Background" Value="#FF3BE510"/>
+        </Style>
+        <Style x:Key="BodyWindowStyle">
+            <Setter Property="Border.Background" Value="#FF3BE510"/>
+            <Setter Property="Border.UseLayoutRounding" Value="True"/>
+            <Setter Property="Border.BorderThickness" Value="9"/>
+            <Setter Property="Border.CornerRadius" Value="0,0,0,10"/>
+            <Setter Property="Border.BorderBrush">
                 <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle
-                    Margin="2"
-                    SnapsToDevicePixels="true"
-                    Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                    StrokeDashArray="1 2"
-                    StrokeThickness="1" />
-                    </ControlTemplate>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3BE510" Offset="0.484"/>
+                        <GradientStop Color="#FF848883" Offset="1"/>
+                    </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
