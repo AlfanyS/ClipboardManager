@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Markup;
 using ClipboardManager.Commands;
+using ClipboardManager.Models;
 
 namespace ClipboardManager.ViewModels
 {
@@ -20,18 +25,10 @@ namespace ClipboardManager.ViewModels
         public SettingsVM()
         {
             MessageBox.Show(System.Windows.SystemParameters.WorkArea.Height.ToString());
+            ScreenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
-        private double _ScreenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
-        public double ScreenHeight
-        {
-            get 
-            {
-                OnPropertyChanged("ScreenHeight");
-                return _ScreenHeight;
-            }
-        }
+        public double ScreenHeight { get; set; }
         public CloseWindowCommand CloseWindow { get; set; } = new CloseWindowCommand();
-
     }
 }

@@ -62,6 +62,8 @@ namespace ClipboardManager.ViewModels
         public AddCommand Add { get; } = new AddCommand();
         public DelAllCommand DelAll { get; } = new DelAllCommand();
         public CloseWindowCommand CloseWindow { get; } = new CloseWindowCommand();
+        public MinimizeWindowCommand MinimizeWindow { get; } = new MinimizeWindowCommand();
+        public MaximizeWindowCommand MaximizeWindow { get; } = new MaximizeWindowCommand();
 
 
 

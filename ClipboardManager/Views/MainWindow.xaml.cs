@@ -35,6 +35,14 @@ namespace ClipboardManager.Views
 			if (!Directory.Exists(@".\Data"))
 				Directory.CreateDirectory(@".\Data");
 			VM.CloseWindow.CloseMethod += () => this.Close();
+			VM.MinimizeWindow.MinimizeMethod += () => this.WindowState = WindowState.Minimized;
+			VM.MaximizeWindow.MaximizeMethod += () => 
+			{
+				if (WindowState == WindowState.Normal)
+					WindowState = WindowState.Maximized;
+				else
+					WindowState = WindowState.Normal;
+			};
 		}
 
 		//Закрытие и сворачивание окна

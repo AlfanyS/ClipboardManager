@@ -32,8 +32,8 @@
                 <Button  Style="{StaticResource CloseButtonStyle}" Width="50" Content="X" HorizontalAlignment="Center"  Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseWindow}" CommandParameter="false" ToolTip="Спрятать">
 
                 </Button>
-                <Button Width="50"  Content="☐" HorizontalAlignment="Right"  Background="Transparent" BorderBrush="Transparent"/>
-                <Button Width="50"  Content="-" HorizontalAlignment="Right"   Background="Transparent" BorderBrush="Transparent"/>
+                <Button Width="50"  Content="☐" HorizontalAlignment="Right"  Background="Transparent" BorderBrush="Transparent" Command="{Binding MaximizeWindow}"/>
+                <Button Width="50"  Content="-" HorizontalAlignment="Right"   Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeWindow}"/>
             </StackPanel>
         </Border>
         <Border Grid.Row="1" Style="{StaticResource BodyWindowStyle}">

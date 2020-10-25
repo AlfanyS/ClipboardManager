@@ -100,6 +100,7 @@ namespace ClipboardManager.Controls
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Value += UpStep;
+            MessageBox.Show(MaxValue.ToString());
         }
 
         private void Substruct_Click(object sender, RoutedEventArgs e)

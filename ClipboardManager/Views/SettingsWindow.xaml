@@ -8,8 +8,9 @@
         xmlns:p="clr-namespace:ClipboardManager.Properties"
         xmlns:ctrl="clr-namespace:ClipboardManager.Controls"
         xmlns:vm="clr-namespace:ClipboardManager.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=System"
         Title="SettingsWindow" Topmost="True"  AllowsTransparency="True" Height="450" Width="800" Background="Transparent" WindowStyle="None" ResizeMode="NoResize">
-    <Grid x:Name="WindowGrid">
+    <Grid x:Name="WindowGrid" >
         <Grid.LayoutTransform>
             <RotateTransform Angle="0"/>
         </Grid.LayoutTransform>
@@ -50,7 +51,7 @@
                                 <Label Grid.Column="0" Grid.Row="0" Content="Минимальная ширина окна (px)"/>
                                 <ctrl:DoubleUpDown Grid.Column="1" Grid.Row="0" Height="30" Width="100" MinValue="0" MaxValue="1000" Value="{Binding Source={x:Static p:Settings.Default},Path=MinWindowWidth,Mode=TwoWay}"/>
                                 <Label Grid.Column="0" Grid.Row="1" Content="Минимальная высота окна (px)"/>
-                                <ctrl:DoubleUpDown Grid.Column="1" Grid.Row="1" Height="30" Width="100" MinValue="0" MaxValue="864" Value="{Binding Source={x:Static p:Settings.Default},Path=MinWindowHeight,Mode=TwoWay}"/>
+                                <ctrl:DoubleUpDown Grid.Column="1" Grid.Row="1" Height="30" Width="100" Value="{Binding Source={x:Static p:Settings.Default},Path=MinWindowHeight,Mode=TwoWay}" MinValue="0"  MaxValue="{Binding ScreenHeight}"/>
                             </Grid>
                         </Expander>
                         <Expander Grid.Row="1" Margin="5" Header="Еще чтото" Padding="5" BorderBrush="LightBlue" BorderThickness="2">

@@ -20,7 +20,7 @@ namespace ClipboardManager.Views
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        SettingsVM VM = new SettingsVM();
+        public SettingsVM VM = new SettingsVM();
         public SettingsWindow()
         {
             DataContext = VM;
